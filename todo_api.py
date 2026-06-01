@@ -15,7 +15,7 @@ next_id=1
 
 @app.get('/todos',response_model=List[Todo],summary="获取所有待办事项")
 async def get_todos(todo_id:int):
-    return todos
+    return {"total":len(todos),"data":todos}
 
 @app.get('/todos/{todo_id}',response_model=Todo,summary="获取单个待办事项")
 async def get_todo(todo_id:int):
