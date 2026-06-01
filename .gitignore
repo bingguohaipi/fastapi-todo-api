@@ -1,0 +1,12 @@
+# 虚拟环境
+.venv/
+
+# Python编译文件
+__pycache__/
+*.pyc
+
+# 系统文件
+.DS_Store
+
+# uvicorn日志
+*..log
