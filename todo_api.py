@@ -42,6 +42,15 @@ async def update_todo(todo_id:int,update_todo:Todo):
             return updated_todo
     raise HTTPException(status_code=404,detail="待办事项不存在")
 
+
+@app.get("todo/search",response_model=List[Todo],summary="搜索待办事项")
+async def search_todos(q:str):
+    results=[]
+    for todo in todos:
+        if q.lower() in todo.title.lower() or (todo.description and q.lower() in todo.description.lower())
+            results.append(todo)            
+    return results
+
 @app.delete('/todos/{todo_id}',summary="删除待办事项")
 async def delete_todo(todo_id:int):
     global todos
