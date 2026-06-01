@@ -24,6 +24,9 @@ async def get_todo(todo_id:int):
             return todo
     raise HTTPException(status_code=404,detail="待办事项不存在")
 
+@app.get("/todos/completed",response_model=List[Todo],summary="获取所有已完成的待办事项")
+async def get_completed_todos():
+    return [todo for todo in todos if todo.completed]
 
 @app.post('/todos',response_model=Todo,summary="创建待办事项")
 async def create_todo(todo:Todo):
@@ -47,7 +50,7 @@ async def update_todo(todo_id:int,update_todo:Todo):
 async def search_todos(q:str):
     results=[]
     for todo in todos:
-        if q.lower() in todo.title.lower() or (todo.description and q.lower() in todo.description.lower())
+        if q.lower() in todo.title.lower() or (todo.description and q.lower() in todo.description.lower()):
             results.append(todo)            
     return results
 
